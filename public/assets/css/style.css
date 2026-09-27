@@ -744,10 +744,12 @@ button {
 }
 
 .person img {
-  width: 46px;
-  height: 46px;
+  width: 60px;
+  height: 60px;
   border: 1px solid var(--line);
   border-radius: 50%;
+  object-fit: cover;
+  display: block;
 }
 
 .person strong {
@@ -1740,3 +1742,4 @@ body {
 .cta .eyebrow {
   color: #55bfff !important;
 }
+
