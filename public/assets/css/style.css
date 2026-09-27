@@ -1654,3 +1654,89 @@ body {
   max-width: 100%;
   overflow: hidden;
 }
+
+/* FIX: Footer logo visible in both themes */
+.site-footer .footer-brand img {
+  display: block !important;
+  width: 150px !important;
+  height: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+/* FOOTER TEXT FIX - LIGHT THEME */
+.site-footer,
+.site-footer p,
+.site-footer h4,
+.site-footer span,
+.site-footer a {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Footer links */
+.site-footer a {
+  color: #ffffff !important;
+}
+
+/* Footer logo */
+.site-footer .footer-brand img {
+  opacity: 1 !important;
+  visibility: visible !important;
+  filter: none !important;
+}
+
+/* Social icons */
+.site-footer .socials a {
+  color: #ffffff !important;
+}
+
+/* Footer bottom */
+.site-footer .footer-bottom {
+  color: #ffffff !important;
+}
+
+.site-footer .footer-bottom span {
+  color: #ffffff !important;
+}
+
+/* CTA SECTION - LIGHT THEME TEXT FIX */
+.cta,
+.cta h2,
+.cta p,
+.cta .eyebrow {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* CTA buttons */
+.cta .btn {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.cta .btn-primary {
+  background: #8fd8ff !important;
+  color: #ffffff !important;
+  border-color: #8fd8ff !important;
+}
+
+.cta .btn:not(.btn-primary) {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* CTA paragraph */
+.cta p {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* CTA small heading */
+.cta .eyebrow {
+  color: #55bfff !important;
+}
