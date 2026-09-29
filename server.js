@@ -4,12 +4,23 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const Database = require("better-sqlite3");
+const nodemailer = require("nodemailer");
 
 const app = express();
 
 const PORT = Number(process.env.PORT || 3000);
 const ADMIN_KEY =
   process.env.ADMIN_KEY || "presszila-admin-2026";
+
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
+  secure: false,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS
+  }
+});
 
 /* =========================
    DATABASE
@@ -114,7 +125,7 @@ app.get("/api/health", (_req, res) => {
    CONTACT / QUOTE FORM
 ========================= */
 
-app.post("/api/inquiries", (req, res) => {
+app.post("/api/inquiries", async (req, res) => {
   try {
     const body = req.body || {};
 
@@ -209,6 +220,27 @@ app.post("/api/inquiries", (req, res) => {
       message
     });
 
+    await transporter.sendMail({
+      from: `"PRESSZILA Website" <${process.env.SMTP_USER}>`,
+      to: process.env.MAIL_TO,
+      replyTo: email,
+      subject: `New ${type === "quote" ? "Quote Request" : "Contact Inquiry"} — ${name}`,
+      text: `
+New inquiry received from PRESSZILA website.
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone || "Not provided"}
+Company: ${company || "Not provided"}
+Service: ${service || "Not provided"}
+Budget: ${budget || "Not provided"}
+Timeline: ${timeline || "Not provided"}
+
+Message:
+${message}
+  `.trim()
+    });
+
     return res.status(201).json({
       ok: true,
       id: result.lastInsertRowid,
@@ -245,6 +277,7 @@ app.get("/api/admin/inquiries", (req, res) => {
       error: "Unauthorized"
     });
   }
+
 
   try {
     const inquiries = db
